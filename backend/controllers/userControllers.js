@@ -48,3 +48,7 @@ export const registerUser = async (req, res, next) => {
         token,
     });
 };
+
+// login user
+
+export const loginUser = async (req, res, next) => {};
