@@ -51,4 +51,32 @@ export const registerUser = async (req, res, next) => {
 
 // login user
 
-export const loginUser = async (req, res, next) => {};
+export const loginUser = async (req, res, next) => {
+    const { email, password } = req.body;
+
+    // validation
+    if (!email || !password) {
+        next('Please Provided all the fileds!!');
+    }
+
+    // check register or not user
+    const isExistUser = await userModel.findOne({ email });
+    if (!isExistUser) {
+        return next('User not Registered, Please Register first!!');
+    }
+
+    // comapre password
+    const isMatch = await isExistUser.comparePassword(password);
+    if (!isMatch) {
+        return next('Invalid Username or password');
+    }
+
+    const token = isExistUser.createJWT();
+
+    res.status(200).json({
+        message: 'Login Successfully',
+        success: true,
+        isExistUser,
+        token,
+    });
+};
