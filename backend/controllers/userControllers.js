@@ -1,3 +1,4 @@
+/* eslint-disable comma-dangle */
 /* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable import/extensions */
 /* eslint-disable consistent-return */
@@ -77,6 +78,36 @@ export const loginUser = async (req, res, next) => {
         message: 'Login Successfully',
         success: true,
         isExistUser,
+        token,
+    });
+};
+// update user
+export const updateUser = async (req, res, next) => {
+    const { name, email, location } = req.body;
+
+    // check validation
+    if (!name || !email || !location) {
+        return next('Please provide all field');
+    }
+    // user update
+    const user = await userModel.findByIdAndUpdate(
+        req.params.id,
+        {
+            name: req.body.name,
+            email: req.body.email,
+            location: req.body.location,
+        },
+        {
+            new: true,
+        }
+    );
+
+    const token = user.createJWT();
+
+    res.status(200).json({
+        message: 'Update Successfully User!!',
+        success: true,
+        user,
         token,
     });
 };
