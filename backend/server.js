@@ -1,6 +1,9 @@
 // imports
+import dotenv from 'dotenv';
 import express from 'express';
 
+// configure dotenv
+dotenv.config()
 // rest object
 const app = express();
 // default route
@@ -11,7 +14,7 @@ app.get('/', (req, res) => {
 
 // server listen port
 
-const PORT = 8080
+const PORT = process.env.PORT || 5000
 
 // listen
 app.listen(PORT, () => {
