@@ -12,24 +12,18 @@ export const getAllUsers = (req, res) => {
 };
 // register user
 
-export const registerUser = async (req, res) => {
+export const registerUser = async (req, res, next) => {
     try {
         // empty field validation
         const { name, email, password } = req.body;
         if (!name || !email || !password) {
-            return res.status(400).json({
-                message: 'Please fill up the all fields',
-                success: false,
-            });
+            return next('Please fill up the all fields');
         }
 
         // check existing user
         const existingUser = await userModel.findOne({ email });
         if (existingUser) {
-            return res.status(400).json({
-                message: 'Email is already registered',
-                success: false,
-            });
+            return next('Email is already registered');
         }
 
         // encrypt the password before registering
@@ -46,10 +40,6 @@ export const registerUser = async (req, res) => {
             newUser,
         });
     } catch (error) {
-        res.status(400).json({
-            message: 'Error In Register Controller',
-            success: false,
-            error,
-        });
+        next(error);
     }
 };

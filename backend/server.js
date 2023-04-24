@@ -7,6 +7,7 @@ import dotenv from 'dotenv';
 import express from 'express';
 import morgan from 'morgan';
 import connectDB from './config/connectDB.js';
+import { errorMiddleware } from './middlewares/errorMiddlewawres.js';
 import userRouter from './routes/userRoutes.js';
 // configure dotenv
 dotenv.config();
@@ -24,8 +25,11 @@ app.use(morgan('dev'));
 
 // default route
 app.use('/api/v1/user', userRouter);
-// server listen port
 
+// validation middleware
+app.use(errorMiddleware);
+
+// server listen port
 const PORT = process.env.PORT || 5000;
 
 // listen
