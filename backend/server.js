@@ -5,6 +5,7 @@
 import cors from 'cors';
 import dotenv from 'dotenv';
 import express from 'express';
+import 'express-async-errors';
 import morgan from 'morgan';
 import connectDB from './config/connectDB.js';
 import { errorMiddleware } from './middlewares/errorMiddlewawres.js';

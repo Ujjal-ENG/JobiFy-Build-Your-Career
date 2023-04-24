@@ -13,33 +13,29 @@ export const getAllUsers = (req, res) => {
 // register user
 
 export const registerUser = async (req, res, next) => {
-    try {
-        // empty field validation
-        const { name, email, password } = req.body;
-        if (!name || !email || !password) {
-            return next('Please fill up the all fields');
-        }
-
-        // check existing user
-        const existingUser = await userModel.findOne({ email });
-        if (existingUser) {
-            return next('Email is already registered');
-        }
-
-        // encrypt the password before registering
-        const hassPass = await bcrypt.hash(password, 10);
-
-        const newUser = await userModel.create({
-            name: req.body.name,
-            email: req.body.email,
-            password: hassPass,
-        });
-        res.status(201).json({
-            message: 'User is Successfully Registered',
-            success: true,
-            newUser,
-        });
-    } catch (error) {
-        next(error);
+    // empty field validation
+    const { name, email, password } = req.body;
+    if (!name || !email || !password) {
+        return next('Please fill up the all fields');
     }
+
+    // check existing user
+    const existingUser = await userModel.findOne({ email });
+    if (existingUser) {
+        return next('Email is already registered');
+    }
+
+    // encrypt the password before registering
+    const hassPass = await bcrypt.hash(password, 10);
+
+    const newUser = await userModel.create({
+        name: req.body.name,
+        email: req.body.email,
+        password: hassPass,
+    });
+    res.status(201).json({
+        message: 'User is Successfully Registered',
+        success: true,
+        newUser,
+    });
 };
