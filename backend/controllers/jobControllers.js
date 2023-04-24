@@ -92,10 +92,34 @@ export const getFilterJobs = async (req, res, next) => {
             },
         },
     ]);
+    if (!filterJob) {
+        return next('There is no filtered job avilable!!');
+    }
+
+    // check monthly yearly stats
+    const monthlyApplication = await jobModel.aggregate([
+        {
+            $match: {
+                createdBy: new mongoose.Types.ObjectId(req.user.userId),
+            },
+        },
+        {
+            $group: {
+                _id: {
+                    year: { $year: '$createdAt' },
+                    month: { $month: '$createdAt' },
+                },
+                count: {
+                    $sum: 1,
+                },
+            },
+        },
+    ]);
     res.status(200).json({
         message: 'Successfully get the filtered jobs',
         success: true,
         results: filterJob.length,
         filterJob,
+        monthlyApplication,
     });
 };
