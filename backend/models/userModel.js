@@ -1,5 +1,6 @@
 /* eslint-disable comma-dangle */
 /* eslint-disable import/no-extraneous-dependencies */
+import jwt from 'jsonwebtoken';
 import mongoose from 'mongoose';
 import validator from 'validator';
 // Schema
@@ -27,5 +28,10 @@ const userSchema = new mongoose.Schema(
     },
     { timestamps: true }
 );
+
+// json WEBTOKEN
+userSchema.methods.createJWT = function () {
+    return jwt.sign({ userId: this._id }, process.env.JWT_SECRET, { expiresIn: '1d' });
+};
 
 export default mongoose.model('User', userSchema);

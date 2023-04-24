@@ -33,9 +33,18 @@ export const registerUser = async (req, res, next) => {
         email: req.body.email,
         password: hassPass,
     });
+
+    //  set json web token
+    const token = newUser.createJWT();
+
     res.status(201).json({
         message: 'User is Successfully Registered',
         success: true,
-        newUser,
+        user: {
+            name: newUser.name,
+            email: newUser.email,
+            location: newUser.location,
+        },
+        token,
     });
 };
