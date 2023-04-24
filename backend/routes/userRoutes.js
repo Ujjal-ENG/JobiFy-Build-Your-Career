@@ -1,6 +1,7 @@
 /* eslint-disable import/extensions */
 import express from 'express';
 import { getAllUsers, loginUser, registerUser } from '../controllers/userControllers.js';
+import { useAuth } from '../middlewares/authMiddlewares.js';
 
 const router = express.Router();
 
@@ -11,6 +12,6 @@ router.get('/all-users', getAllUsers);
 router.post('/register-user', registerUser);
 
 // login user
-router.post('/login-user', loginUser);
+router.post('/login-user', useAuth, loginUser);
 
 export default router;
