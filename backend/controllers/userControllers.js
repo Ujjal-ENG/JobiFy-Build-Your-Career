@@ -13,10 +13,20 @@ export const getAllUsers = (req, res) => {
 
 export const registerUser = async (req, res) => {
     try {
+        // empty field validation
         const { name, email, password } = req.body;
         if (!name || !email || !password) {
             return res.status(400).json({
                 message: 'Please fill up the all fields',
+                success: false,
+            });
+        }
+
+        // check existing user
+        const existingUser = await userModel.find({ email });
+        if (existingUser) {
+            return res.status(400).json({
+                message: 'Email is already registered',
                 success: false,
             });
         }
