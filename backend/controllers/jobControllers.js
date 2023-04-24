@@ -19,3 +19,5 @@ export const createJob = async (req, res, next) => {
         job,
     });
 };
+// get job
+export const getAllJobs = async (req, res, next) => {};
