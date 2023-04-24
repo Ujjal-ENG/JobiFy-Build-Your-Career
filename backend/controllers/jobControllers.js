@@ -44,7 +44,7 @@ export const updateJobById = async (req, res, next) => {
     if (!job) {
         return next('Sorry this Job is not found!!');
     }
-    if (!req.user.userId === job.createdBy.toString()) {
+    if (req.user.userId !== job.createdBy.toString()) {
         return next('Your not authorize to update this job');
     }
     const updateJob = await jobModel.findByIdAndUpdate(req.params.id, req.body, {
