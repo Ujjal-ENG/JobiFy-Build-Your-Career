@@ -1,3 +1,5 @@
+/* eslint-disable func-names */
+/* eslint-disable no-underscore-dangle */
 /* eslint-disable comma-dangle */
 /* eslint-disable import/no-extraneous-dependencies */
 import jwt from 'jsonwebtoken';
