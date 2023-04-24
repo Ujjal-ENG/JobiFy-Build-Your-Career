@@ -84,7 +84,6 @@ export const loginUser = async (req, res, next) => {
 // update user
 export const updateUser = async (req, res, next) => {
     const { name, email, location } = req.body;
-
     // check validation
     if (!name || !email || !location) {
         return next('Please provide all field');

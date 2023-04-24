@@ -9,6 +9,7 @@ import 'express-async-errors';
 import morgan from 'morgan';
 import connectDB from './config/connectDB.js';
 import { errorMiddleware } from './middlewares/errorMiddlewawres.js';
+import jobRouter from './routes/jobRoutes.js';
 import userRouter from './routes/userRoutes.js';
 // configure dotenv
 dotenv.config();
@@ -26,6 +27,7 @@ app.use(morgan('dev'));
 
 // default route
 app.use('/api/v1/user', userRouter);
+app.use('/api/v1/job', jobRouter);
 
 // validation middleware
 app.use(errorMiddleware);

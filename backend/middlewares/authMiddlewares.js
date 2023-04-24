@@ -17,6 +17,6 @@ export const useAuth = async (req, res, next) => {
         req.user = { userId: payload.userId };
         next();
     } catch (error) {
-        next('Auth Failed');
+        return next('Auth Failed');
     }
 };
