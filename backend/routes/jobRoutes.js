@@ -5,6 +5,7 @@ import {
   createJob,
   deleteJobById,
   getAllJobs,
+  getFilterJobs,
   updateJobById,
 } from '../controllers/jobControllers.js';
 import { useAuth } from '../middlewares/authMiddlewares.js';
@@ -22,4 +23,7 @@ router.patch('/update-job/:id', useAuth, updateJobById);
 
 // delete job
 router.delete('/delete-job/:id', useAuth, deleteJobById);
+
+// job status filter
+router.get('/get-filter-job', useAuth, getFilterJobs);
 export default router;

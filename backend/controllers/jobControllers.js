@@ -3,6 +3,7 @@
 /* eslint-disable import/extensions */
 /* eslint-disable import/prefer-default-export */
 
+import mongoose from 'mongoose';
 import jobModel from '../models/jobModel.js';
 
 // create job
@@ -73,5 +74,28 @@ export const deleteJobById = async (req, res, next) => {
     res.status(200).json({
         message: 'Job is Successfully deleted',
         success: true,
+    });
+};
+// get filter jobs
+export const getFilterJobs = async (req, res, next) => {
+    const filterJob = await jobModel.aggregate([
+        // serach by user jobs
+        {
+            $match: {
+                createdBy: new mongoose.Types.ObjectId(req.user.userId),
+            },
+        },
+        {
+            $group: {
+                _id: '$status',
+                count: { $sum: 1 },
+            },
+        },
+    ]);
+    res.status(200).json({
+        message: 'Successfully get the filtered jobs',
+        success: true,
+        results: filterJob.length,
+        filterJob,
     });
 };
