@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 /* eslint-disable consistent-return */
 /* eslint-disable import/extensions */
 /* eslint-disable import/prefer-default-export */
@@ -54,5 +55,23 @@ export const updateJobById = async (req, res, next) => {
         message: 'Updated Successfully',
         success: true,
         updateJob,
+    });
+};
+// delete job
+export const deleteJobById = async (req, res, next) => {
+    const job = await jobModel.findOne({ _id: req.params.id });
+
+    if (!job) {
+        return next('This job is not exist in our Database');
+    }
+    console.log(req.user.userId, job.createdBy.toString());
+    if (req.user.userId !== job.createdBy.toString()) {
+        return next('You are not authrized to delete this job');
+    }
+
+    await jobModel.findByIdAndDelete(req.params.id);
+    res.status(200).json({
+        message: 'Job is Successfully deleted',
+        success: true,
     });
 };
