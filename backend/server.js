@@ -6,6 +6,7 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 import express from 'express';
 import 'express-async-errors';
+import helmet from 'helmet';
 import morgan from 'morgan';
 import connectDB from './config/connectDB.js';
 import { errorMiddleware } from './middlewares/errorMiddlewawres.js';
@@ -24,6 +25,7 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 app.use(morgan('dev'));
+app.use(helmet());
 
 // default route
 app.use('/api/v1/user', userRouter);
