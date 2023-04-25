@@ -23,7 +23,9 @@ export const createJob = async (req, res, next) => {
 };
 // get job
 export const getAllJobs = async (req, res, next) => {
-    const { status, workType, search } = req.query;
+    const {
+ status, workType, search, sort 
+} = req.query;
 
     // condition for searching filters
     const queryObject = {
@@ -44,8 +46,16 @@ export const getAllJobs = async (req, res, next) => {
     if (workType && workType !== 'all') {
         queryObject.workType = workType;
     }
+    let queryResults = jobModel.find(queryObject);
 
-    const queryResults = jobModel.find(queryObject);
+    // sorting performed
+    if (sort === 'latest') {
+        queryResults = queryResults.sort('-createdAt');
+    }
+    if (sort === 'oldest') {
+        queryResults = queryResults.sort('createdAt');
+    }
+
     const jobs = await queryResults;
 
     // const jobs = await jobModel.find({ createdBy: req.user.userId });
