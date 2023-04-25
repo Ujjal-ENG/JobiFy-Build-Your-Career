@@ -8,6 +8,7 @@ import express from 'express';
 import 'express-async-errors';
 import helmet from 'helmet';
 import morgan from 'morgan';
+import xss from 'xss-clean';
 import connectDB from './config/connectDB.js';
 import { errorMiddleware } from './middlewares/errorMiddlewawres.js';
 import jobRouter from './routes/jobRoutes.js';
@@ -23,9 +24,10 @@ const app = express();
 
 // middlewares
 app.use(express.json());
+app.use(helmet());
+app.use(xss());
 app.use(cors());
 app.use(morgan('dev'));
-app.use(helmet());
 
 // default route
 app.use('/api/v1/user', userRouter);
