@@ -56,6 +56,14 @@ export const getAllJobs = async (req, res, next) => {
         queryResults = queryResults.sort('createdAt');
     }
 
+    if (sort === 'a-z') {
+        queryResults = queryResults.sort('position');
+    }
+
+    if (sort === 'A-Z') {
+        queryResults = queryResults.sort('-position');
+    }
+
     const jobs = await queryResults;
 
     // const jobs = await jobModel.find({ createdBy: req.user.userId });
