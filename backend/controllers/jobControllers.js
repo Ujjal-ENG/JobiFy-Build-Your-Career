@@ -23,7 +23,27 @@ export const createJob = async (req, res, next) => {
 };
 // get job
 export const getAllJobs = async (req, res, next) => {
-    const jobs = await jobModel.find({ createdBy: req.user.userId });
+    const { status, workType } = req.query;
+
+    // condition for searching filters
+    const queryObject = {
+        createdBy: req.user.userId,
+    };
+
+    // logic filters
+    if (status && status !== 'all') {
+        queryObject.status = status;
+    }
+
+    // sercing for worktypes
+    if (workType && workType !== 'all') {
+        queryObject.workType = workType;
+    }
+
+    const queryResults = jobModel.find(queryObject);
+    const jobs = await queryResults;
+
+    // const jobs = await jobModel.find({ createdBy: req.user.userId });
     if (!jobs) {
         return next('You do not created any job yet!!!');
     }
