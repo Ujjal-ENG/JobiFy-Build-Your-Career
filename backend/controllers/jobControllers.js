@@ -23,12 +23,17 @@ export const createJob = async (req, res, next) => {
 };
 // get job
 export const getAllJobs = async (req, res, next) => {
-    const { status, workType } = req.query;
+    const { status, workType, search } = req.query;
 
     // condition for searching filters
     const queryObject = {
         createdBy: req.user.userId,
     };
+
+    // search query code
+    if (search) {
+        queryObject.position = { $regex: search, $options: 'i' };
+    }
 
     // logic filters
     if (status && status !== 'all') {
