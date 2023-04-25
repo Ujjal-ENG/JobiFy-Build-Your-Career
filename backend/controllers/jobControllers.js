@@ -67,6 +67,17 @@ export const getAllJobs = async (req, res, next) => {
         queryResults = queryResults.sort('-position');
     }
 
+    // pagination
+    const page = Number(req.query.page) || 1;
+    const limit = Number(req.query.limit) || 10;
+    const skip = (page - 1) * limit;
+    
+    queryResults = queryResults.skip(skip).limit(limit);
+
+    // jobs count
+    const totalJobs = await jobModel.countDocuments(queryResults);
+    const numOfPage = Math.ceil(totalJobs / limit);
+
     const jobs = await queryResults;
 
     // const jobs = await jobModel.find({ createdBy: req.user.userId });
@@ -78,6 +89,7 @@ export const getAllJobs = async (req, res, next) => {
         success: true,
         results: jobs.length,
         jobs,
+        numOfPage
     });
 };
 // update job
