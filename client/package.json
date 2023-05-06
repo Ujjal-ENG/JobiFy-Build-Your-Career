@@ -10,6 +10,8 @@
         "lint": "npm i -D prettier && npm i -D babel-eslint && npx install-peerdeps --dev eslint-config-airbnb && npm i -D eslint-config-prettier eslint-plugin-prettier"
     },
     "dependencies": {
+        "flowbite": "^1.6.5",
+        "flowbite-react": "^0.4.4",
         "localforage": "^1.10.0",
         "match-sorter": "^6.3.1",
         "react": "^18.2.0",

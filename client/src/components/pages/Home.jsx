@@ -1,12 +1,8 @@
+/* eslint-disable react/jsx-indent-props */
 import React from 'react';
 
 function Home() {
-    const a = 'c';
-    return (
-        <>
-            <h1>hekkko</h1>
-        </>
-    );
+    return <>fdkjf</>;
 }
 
 export default Home;
