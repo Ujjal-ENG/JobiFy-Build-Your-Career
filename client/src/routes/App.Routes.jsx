@@ -2,6 +2,7 @@
 /* eslint-disable comma-dangle */
 import { createBrowserRouter } from 'react-router-dom';
 import App from '../App';
+import Dashboard from '../components/pages/Dashboard';
 import ErrorPage from '../components/pages/ErrorPage';
 import Home from '../components/pages/Home';
 import Login from '../components/pages/Login&Register/Login';
@@ -24,6 +25,10 @@ export const router = createBrowserRouter([
             {
                 path: '/register',
                 element: <Register />
+            },
+            {
+                path: '/dashboard',
+                element: <Dashboard />
             }
         ]
     }
