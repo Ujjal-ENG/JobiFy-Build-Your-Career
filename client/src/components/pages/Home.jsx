@@ -15,7 +15,7 @@ function Home() {
 
             <div className="relative z-10  pt-10">
                 <div className="mt-20 ml-10 h-[70vh] flex justify-start items-center">
-                    <div className="w-full max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-8 dark:bg-gray-800 dark:border-gray-700">
+                    <div className="w-full  max-w-md p-4 bg-white border border-gray-200 rounded-lg shadow-2xl shadow-black sm:p-8 dark:bg-gray-800 dark:border-gray-700">
                         <div className="flex items-center mb-6 text-2xl font-semibold justify-center w-full text-gray-900 dark:text-white">
                             <img className="w-8 h-8 mr-2" src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/logo.svg" alt="logo" />
                             Job Tracking App
