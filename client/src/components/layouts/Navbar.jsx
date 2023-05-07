@@ -4,9 +4,13 @@
 /* eslint-disable react/jsx-indent-props */
 /* eslint-disable react/jsx-closing-bracket-location */
 import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
+import { setUser } from '../../redux/features/auth/authSlice';
 
 function Navbar() {
+    const { user } = useSelector((state) => state.auth);
+    const dispatch = useDispatch();
     return (
         <nav className="bg-white dark:bg-gray-900 fixed w-full z-20 top-0 left-0 border-b border-gray-200 dark:border-gray-600">
             <div className="max-w-screen-2xl flex flex-wrap items-center justify-between mx-auto p-4">
@@ -67,11 +71,23 @@ function Navbar() {
                             </NavLink>
                         </li>
                         <li>
-                            <NavLink
-                                to="/login"
-                                className="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">
-                                Login
-                            </NavLink>
+                            {!user ? (
+                                <NavLink
+                                    to="/login"
+                                    className="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">
+                                    Login
+                                </NavLink>
+                            ) : (
+                                <button
+                                    onClick={() => {
+                                        dispatch(setUser(null));
+                                        localStorage.clear();
+                                    }}
+                                    type="button"
+                                    className="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">
+                                    Logout
+                                </button>
+                            )}
                         </li>
                     </ul>
                 </div>
