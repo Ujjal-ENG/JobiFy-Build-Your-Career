@@ -9,7 +9,6 @@ import {
   registerUser,
   updateUser,
 } from '../controllers/userControllers.js';
-import { useAuth } from '../middlewares/authMiddlewares.js';
 
 // ip limiter
 const limiter = rateLimit({
@@ -27,7 +26,7 @@ router.get('/all-users', getAllUsers);
 router.post('/register-user', limiter, registerUser);
 
 // login user
-router.post('/login-user', limiter, useAuth, loginUser);
+router.post('/login-user', limiter, loginUser);
 
 // update user
 router.patch('/update-user/:id', updateUser);

@@ -54,7 +54,6 @@ export const registerUser = async (req, res, next) => {
 
 export const loginUser = async (req, res, next) => {
     const { email, password } = req.body;
-
     // validation
     if (!email || !password) {
         next('Please Provided all the fileds!!');

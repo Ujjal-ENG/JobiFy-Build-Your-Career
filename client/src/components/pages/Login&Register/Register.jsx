@@ -44,7 +44,7 @@ function Register() {
             });
             if (data.success) {
                 toast.success('Registered Successfull!!!');
-                navigate('/dashboard');
+                navigate('/login');
             }
             dispatch(hideLoading());
         } catch (error) {
