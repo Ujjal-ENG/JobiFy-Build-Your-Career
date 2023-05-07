@@ -1,5 +1,6 @@
 /* eslint-disable comma-dangle */
 /* eslint-disable react/jsx-indent */
+import 'flowbite';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { Toaster } from 'react-hot-toast';

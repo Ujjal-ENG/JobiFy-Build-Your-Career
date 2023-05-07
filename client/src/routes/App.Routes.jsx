@@ -8,6 +8,8 @@ import ErrorPage from '../components/pages/ErrorPage';
 import Home from '../components/pages/Home';
 import Login from '../components/pages/Login&Register/Login';
 import Register from '../components/pages/Login&Register/Register';
+import LatestJobs from '../components/pages/Menu/LatestJobs';
+import UpdateProfile from '../components/pages/Menu/UpdateProfile';
 import PrivateRoute from './PrivateRoute';
 import PublicRoute from './PublicRoute';
 
@@ -47,7 +49,17 @@ export const router = createBrowserRouter([
                     <PrivateRoute>
                         <Dashboard />
                     </PrivateRoute>
-                )
+                ),
+                children: [
+                    {
+                        path: 'latest-jobs',
+                        element: <LatestJobs />
+                    },
+                    {
+                        path: 'update-profile',
+                        element: <UpdateProfile />
+                    }
+                ]
             }
         ]
     }
