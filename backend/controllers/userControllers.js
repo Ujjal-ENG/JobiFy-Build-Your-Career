@@ -34,6 +34,7 @@ export const getUser = async (req, res) => {
                 message: 'User not found',
             });
         }
+        user.password = undefined;
         res.status(200).json({
             success: true,
             user,

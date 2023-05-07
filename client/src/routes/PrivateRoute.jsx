@@ -27,7 +27,7 @@ function PrivateRoute({ children }) {
             );
             dispatch(hideLoading());
             if (data.success) {
-                dispatch(setUser(data));
+                dispatch(setUser(data.user));
             } else {
                 console.log('Heeko');
                 localStorage.clear();
@@ -44,7 +44,7 @@ function PrivateRoute({ children }) {
             getUser();
         }
     }, [user]);
-
+    console.log(user);
     if (localStorage.getItem('token')) {
         return children;
     }
