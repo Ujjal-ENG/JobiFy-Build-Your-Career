@@ -2,6 +2,7 @@
     "name": "my-react-template",
     "private": true,
     "version": "0.0.0",
+    "proxy": "http://localhost:8080",
     "type": "module",
     "scripts": {
         "dev": "vite",
@@ -11,6 +12,7 @@
     },
     "dependencies": {
         "@reduxjs/toolkit": "^1.9.5",
+        "axios": "^1.4.0",
         "flowbite": "^1.6.5",
         "flowbite-react": "^0.4.4",
         "localforage": "^1.10.0",
