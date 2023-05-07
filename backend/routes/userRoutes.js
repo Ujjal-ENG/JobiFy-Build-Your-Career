@@ -5,10 +5,12 @@ import express from 'express';
 import rateLimit from 'express-rate-limit';
 import {
   getAllUsers,
+  getUser,
   loginUser,
   registerUser,
   updateUser,
 } from '../controllers/userControllers.js';
+import { useAuth } from '../middlewares/authMiddlewares.js';
 
 // ip limiter
 const limiter = rateLimit({
@@ -20,7 +22,7 @@ const limiter = rateLimit({
 const router = express.Router();
 
 // get all users
-router.get('/all-users', getAllUsers);
+router.get('/all-users', useAuth, getAllUsers);
 
 // register user
 router.post('/register-user', limiter, registerUser);
@@ -29,6 +31,9 @@ router.post('/register-user', limiter, registerUser);
 router.post('/login-user', limiter, loginUser);
 
 // update user
-router.patch('/update-user/:id', updateUser);
+router.patch('/update-user/:id', useAuth, updateUser);
+
+// get User
+router.get('/get-user', useAuth, getUser);
 
 export default router;
