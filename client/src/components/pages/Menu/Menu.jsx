@@ -58,7 +58,7 @@ function Menu() {
                                 <span className="ml-3">Dashboard</span>
                             </a>
                         </li>
-                        <Link to="latest-jobs" className="flex items-center gap-1 ml-3">
+                        <Link to="latest-jobs" className="flex items-center gap-1  text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 p-2">
                             <BsFillHandbagFill className="text-xl text-gray-500" />
 
                             <span className="ml-3">Lates Jobs</span>
