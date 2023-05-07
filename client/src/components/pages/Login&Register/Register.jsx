@@ -4,8 +4,12 @@
 /* eslint-disable react/jsx-indent */
 /* eslint-disable react/jsx-indent-props */
 /* eslint-disable react/jsx-closing-bracket-location */
+import axios from 'axios';
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { toast } from 'react-hot-toast';
+import { useDispatch } from 'react-redux';
+import { Link, useNavigate } from 'react-router-dom';
+import { hideLoading, showLoading } from '../../../redux/features/alertSlice';
 import FormInput from '../../shared/FormInput';
 
 function Register() {
@@ -15,17 +19,36 @@ function Register() {
         password: '',
         location: ''
     });
-
+    const { name, email, password, location } = formData;
     const handleChange = (e) => {
         setFormData((ps) => ({
             ...ps,
             [e.target.id]: e.target.value
         }));
     };
-
-    const handleSubmit = (e) => {
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log(formData);
+        try {
+            dispatch(showLoading());
+            const { data } = await axios.post('api/v1/user/register-user', {
+                name,
+                email,
+                password,
+                location
+            });
+            if (data.success) {
+                console.log(data);
+                toast.success('Registered Successfull!!!');
+                navigate('/dashboard');
+            }
+            dispatch(hideLoading());
+        } catch (error) {
+            dispatch(hideLoading());
+            console.log(error);
+            toast.error('Invalid Register Information, Please try again later!!');
+        }
     };
 
     return (
