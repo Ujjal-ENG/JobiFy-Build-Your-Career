@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-indent */
 /* eslint-disable import/prefer-default-export */
 /* eslint-disable comma-dangle */
 import { createBrowserRouter } from 'react-router-dom';
@@ -7,6 +8,7 @@ import ErrorPage from '../components/pages/ErrorPage';
 import Home from '../components/pages/Home';
 import Login from '../components/pages/Login&Register/Login';
 import Register from '../components/pages/Login&Register/Register';
+import PrivateRoute from './PrivateRoute';
 
 export const router = createBrowserRouter([
     {
@@ -28,7 +30,11 @@ export const router = createBrowserRouter([
             },
             {
                 path: '/dashboard',
-                element: <Dashboard />
+                element: (
+                    <PrivateRoute>
+                        <Dashboard />
+                    </PrivateRoute>
+                )
             }
         ]
     }

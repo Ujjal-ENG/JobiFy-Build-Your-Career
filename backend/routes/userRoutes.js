@@ -34,6 +34,6 @@ router.post('/login-user', limiter, loginUser);
 router.patch('/update-user/:id', useAuth, updateUser);
 
 // get User
-router.get('/get-user', useAuth, getUser);
+router.post('/get-user', useAuth, getUser);
 
 export default router;
