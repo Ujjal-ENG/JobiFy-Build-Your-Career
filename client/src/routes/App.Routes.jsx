@@ -9,6 +9,7 @@ import Home from '../components/pages/Home';
 import Login from '../components/pages/Login&Register/Login';
 import Register from '../components/pages/Login&Register/Register';
 import PrivateRoute from './PrivateRoute';
+import PublicRoute from './PublicRoute';
 
 export const router = createBrowserRouter([
     {
@@ -18,15 +19,27 @@ export const router = createBrowserRouter([
         children: [
             {
                 path: '/',
-                element: <Home />
+                element: (
+                    <PublicRoute>
+                        <Home />
+                    </PublicRoute>
+                )
             },
             {
                 path: '/login',
-                element: <Login />
+                element: (
+                    <PublicRoute>
+                        <Login />
+                    </PublicRoute>
+                )
             },
             {
                 path: '/register',
-                element: <Register />
+                element: (
+                    <PublicRoute>
+                        <Register />
+                    </PublicRoute>
+                )
             },
             {
                 path: '/dashboard',
