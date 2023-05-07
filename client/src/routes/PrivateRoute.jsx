@@ -44,7 +44,6 @@ function PrivateRoute({ children }) {
             getUser();
         }
     }, [user]);
-    console.log(user);
     if (localStorage.getItem('token')) {
         return children;
     }
